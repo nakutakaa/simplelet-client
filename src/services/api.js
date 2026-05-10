@@ -19,7 +19,7 @@ const api = {
     return response.json();
   },
 
-  // Auth (we'll add more later)
+  // Auth
   login: async (phone, password) => {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
@@ -34,6 +34,51 @@ const api = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, phone, password }),
+    });
+    return response.json();
+  },
+
+  // Add these verification methods
+  sendVerification: async (token) => {
+    const response = await fetch(`${API_URL}/auth/send-verification`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.json();
+  },
+
+  verifyPhone: async (token, code) => {
+    const response = await fetch(`${API_URL}/auth/verify-phone`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ code }),
+    });
+    return response.json();
+  },
+
+  verificationStatus: async (token) => {
+    const response = await fetch(`${API_URL}/auth/verification-status`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.json();
+  },
+  // Add to api object
+  createListing: async (token, listingData) => {
+    const response = await fetch(`${API_URL}/listings`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(listingData),
     });
     return response.json();
   },
