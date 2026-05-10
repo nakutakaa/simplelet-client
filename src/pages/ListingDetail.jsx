@@ -11,6 +11,7 @@ import "swiper/css/pagination";
 import "swiper/css/zoom";
 
 import api from "../services/api";
+import CommentSection from "../components/CommentSection";
 
 function ListingDetail() {
   const { id } = useParams();
@@ -162,13 +163,8 @@ function ListingDetail() {
         </div>
       </div>
 
-      {/* Comments Section - Coming Soon */}
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="font-semibold text-lg mb-4">Comments</h3>
-        <p className="text-gray-500 text-center py-8">
-          Comment system coming soon! 🔜
-        </p>
-      </div>
+      {/* Comments Section  */}
+      <CommentSection listingId={id} />
 
       {/* Back Button */}
       <button

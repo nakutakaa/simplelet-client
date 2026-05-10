@@ -82,6 +82,46 @@ const api = {
     });
     return response.json();
   },
+  // Comments
+  getComments: async (listingId, page = 1) => {
+    const response = await fetch(
+      `${API_URL}/comments/listings/${listingId}/comments?page=${page}`,
+    );
+    return response.json();
+  },
+
+  getReplies: async (commentId, page = 1) => {
+    const response = await fetch(
+      `${API_URL}/comments/${commentId}/replies?page=${page}`,
+    );
+    return response.json();
+  },
+
+  postComment: async (
+    listingId,
+    token,
+    content,
+    parentId = null,
+    guestName = null,
+  ) => {
+    const headers = token
+      ? { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
+      : { "Content-Type": "application/json" };
+
+    const body = { content };
+    if (parentId) body.parent_id = parentId;
+    if (guestName) body.guest_name = guestName;
+
+    const response = await fetch(
+      `${API_URL}/comments/listings/${listingId}/comments`,
+      {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+      },
+    );
+    return response.json();
+  },
 };
 
 export default api;
