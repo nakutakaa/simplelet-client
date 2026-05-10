@@ -1,6 +1,7 @@
 // src/App.jsx
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import ListingDetail from "./pages/ListingDetail"; // Add this import
 
 function App() {
   return (
@@ -33,10 +34,8 @@ function App() {
         <main className="container mx-auto px-4 py-8">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route
-              path="/listing/:id"
-              element={<div>Listing Detail - Coming Soon</div>}
-            />
+            <Route path="/listing/:id" element={<ListingDetail />} />{" "}
+            {/* Add this line */}
             <Route path="/login" element={<div>Login - Coming Soon</div>} />
             <Route
               path="/register"
